@@ -1,8 +1,12 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Creates an cacheable R matrix object
+## Author : Abdul Khan
 
-## Write a short comment describing this function
 
+
+## This method creates a matrix that can cache solve result
+## Essentially it creates a special object that is list of function
+## {set, get, setsolve, getsolve}
+## These functions are used by subsequent helper method. 
 makeCacheMatrix <- function(x = matrix()) {
   s <- NULL
   set <- function(y) {
@@ -18,10 +22,13 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## This method uses the object created by makeCacheMatrix
+## It just reads precomputed results using list's getsolve function
+## If the results are cached then it reads those otherwise it solves
+## and caches the results.
 
 cacheSolve <- function(x, ...) {
-          ## Return a matrix that is the inverse of 'x'
+  ## Return a matrix that is the inverse of 'x'
   s <- x$getsolve()
   if(!is.null(s)) {
     message("getting cached data")
